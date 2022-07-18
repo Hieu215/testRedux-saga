@@ -1,11 +1,3 @@
-import { takeEvery } from 'redux-saga/effects';
-import { IMAGES } from '~/constants';
+import imagesSaga from './imagesSaga';
 
-function* handleImagesLoad() {
-  yield console.log('loadIMG');
-}
-
-function* rootSaga() {
-  yield takeEvery(IMAGES.LOAD, handleImagesLoad);
-}
-export default rootSaga;
+export default imagesSaga;

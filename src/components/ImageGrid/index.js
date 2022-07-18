@@ -1,26 +1,33 @@
 import style from './Image.module.scss';
 import classNames from 'classnames/bind';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { loadImages } from '~/actions';
-
+import Button from '../Button';
 const cl = classNames.bind(style);
 function Image(props) {
-  const [states, setSates] = useState([]);
-  const componentDidMounth = () => {
-    axios.get('https://dog.ceo/api/breeds/image/random').then((res) => setSates(res.data.message));
-  };
+  let { loadImages, error, images } = props;
+
+  const componentDidMounth = () => {};
 
   useEffect(() => {
     componentDidMounth();
-  }, []);
+  });
 
   return (
     <div className={cl('wrapper')}>
-      {<img src={states} alt="error"></img>}
-      <button onClick={props.loadImages}>loadImages</button>
+      <section className="grid">
+        {images &&
+          images.map((image) => (
+            <div key={image.id} className={cl(`item item-${Math.ceil(image.height / image.width)}`)}>
+              <img src={image.urls.small} alt={image.user.username} />
+            </div>
+          ))}
+      </section>
+      <Button onClick={loadImages}>loadImages</Button>
+      {error && <div className={cl('error')}>{JSON.stringify(error)}</div>}
     </div>
   );
 }
