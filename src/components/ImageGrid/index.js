@@ -22,7 +22,7 @@ function Image(props) {
     <div className={cl('wrapper')}>
       <section className={cl('grid')}>
         {images.map((image) => (
-          <div key={image.id} className={cl('item', `item-${Math.ceil(image.height / image.width)}`)}>
+          <div key={images.id} className={cl('item', `item-${Math.ceil(image.height / image.width)}`)}>
             <Stats stats={imagesStats[image.id]} />
             <img src={image.urls.small} alt={image.user.username} />
           </div>

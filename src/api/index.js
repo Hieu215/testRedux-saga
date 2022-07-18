@@ -14,7 +14,6 @@ const fetchImages = async (page) => {
 const fetchImageStats = async (id) => {
   const response = await fetch(`${URL}/${id}/statistics${KEY}`);
   const data = await response.json();
-  console.log(data);
   if (response.status >= 400) {
     throw new Error(data.errors);
   }
