@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 
 import { loadImages } from '~/actions';
 import Button from '../Button';
+import Stats from '../Stats/Stats';
+
 const cl = classNames.bind(style);
 function Image(props) {
-  let { loadImages, error, images } = props;
+  let { loadImages, error, images, imagesStats } = props;
 
   const componentDidMounth = () => {};
 
@@ -18,23 +20,24 @@ function Image(props) {
 
   return (
     <div className={cl('wrapper')}>
-      <section className="grid">
-        {images &&
-          images.map((image) => (
-            <div key={image.id} className={cl(`item item-${Math.ceil(image.height / image.width)}`)}>
-              <img src={image.urls.small} alt={image.user.username} />
-            </div>
-          ))}
+      <section className={cl('grid')}>
+        {images.map((image) => (
+          <div key={image.id} className={cl('item', `item-${Math.ceil(image.height / image.width)}`)}>
+            <Stats stats={imagesStats[image.id]} />
+            <img src={image.urls.small} alt={image.user.username} />
+          </div>
+        ))}
       </section>
       <Button onClick={loadImages}>loadImages</Button>
       {error && <div className={cl('error')}>{JSON.stringify(error)}</div>}
     </div>
   );
 }
-const mapStateToProps = ({ loading, images, error }) => ({
+const mapStateToProps = ({ loading, images, error, imagesStats }) => ({
   loading,
   images,
   error,
+  imagesStats,
 });
 
 const mapDispatchToProps = (dispatch) => {

@@ -11,13 +11,14 @@ const fetchImages = async (page) => {
   return data;
 };
 
-// const fetchImageStats = async (id) => {
-//   const response = await fetch(`${URL}/${id}/statistics${KEY}`);
-//   const data = await response.json();
-//   if (response.status >= 400) {
-//     throw new Error(data.errors);
-//   }
-//   return data;
-// };
+const fetchImageStats = async (id) => {
+  const response = await fetch(`${URL}/${id}/statistics${KEY}`);
+  const data = await response.json();
+  console.log(data);
+  if (response.status >= 400) {
+    throw new Error(data.errors);
+  }
+  return data;
+};
 
-export default fetchImages;
+export { fetchImages, fetchImageStats };
